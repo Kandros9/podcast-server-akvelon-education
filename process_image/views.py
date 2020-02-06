@@ -14,9 +14,9 @@ import numpy as np
 class AverageColorView(APIView):
     permission_classes = ()
 
-    def get(self, request):
-        #image_url = request.data.get('image_url')
-        image_url = 'https://cdn-images-1.listennotes.com/podcasts/in-pursuit-from-glassdoor-glassdoor-oq9VMd3XrOi-XL3IjyeScFK.1400x1400.jpg'
+    def post(self, request):
+        image_url = request.data.get('image_url')
+        #image_url = 'https://cdn-images-1.listennotes.com/podcasts/in-pursuit-from-glassdoor-glassdoor-oq9VMd3XrOi-XL3IjyeScFK.1400x1400.jpg'
 
         resp = requests.get(image_url)
         img = Image.open(BytesIO(resp.content))
