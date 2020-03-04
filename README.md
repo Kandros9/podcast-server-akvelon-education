@@ -32,6 +32,7 @@ Made specifically for the [Podcasts](https://github.com/Kandros9/podcasts-akvelo
     virtualenv -p python3 ./venv
     ```
 4. Activate virtualenv
+
     **Windows**
     ```
     .\venv\Scripts\activate
