@@ -9,20 +9,36 @@ import cv2
 from sklearn.cluster import KMeans
 from collections import Counter
 import numpy as np
+import time
 
 
 class AverageColorView(APIView):
     permission_classes = ()
 
     def post(self, request):
-        image_url = request.data.get('image_url')
-        #image_url = 'https://cdn-images-1.listennotes.com/podcasts/in-pursuit-from-glassdoor-glassdoor-oq9VMd3XrOi-XL3IjyeScFK.1400x1400.jpg'
+        image_urls = request.data.get('image_urls')
 
-        resp = requests.get(image_url)
-        img = Image.open(BytesIO(resp.content))
-        img_arr = np.array(img)
+        dominant_colors = []
 
-        return Response({"dominant_color": get_dominant_color(img_arr)}, status=status.HTTP_200_OK)
+        for image_url in image_urls:
+            start_time = time.time()
+            resp = requests.get(image_url)
+            print("--- %s seconds ---" % (time.time() - start_time))
+            start_time = time.time()
+            img = Image.open(BytesIO(resp.content))
+            print("--- %s seconds ---" % (time.time() - start_time))
+            start_time = time.time()
+            img2=img.resize((1,1))
+            print("--- %s seconds ---" % (time.time() - start_time))
+            start_time = time.time()
+
+            color=img2.getpixel((0,0))
+            print("--- %s seconds ---" % (time.time() - start_time))
+            start_time = time.time()
+            dominant_colors.append(color)
+            print(color)
+
+        return Response({"dominant_colors": dominant_colors}, status=status.HTTP_200_OK)
 
 
 def get_dominant_color(image, k=4, image_processing_size=(25, 25)):
