@@ -4,7 +4,7 @@ chardet==3.0.4
 colorthief==0.2.1
 Django==3.0.3
 django-cors-headers==3.2.1
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 idna==2.8
 joblib==0.14.1
 numpy==1.18.1
